@@ -1,0 +1,43 @@
+# task1.py
+
+def kwargsAcceptFun(**kwargs):
+    """Accepts an arbitrary number of named arguments and prints them."""
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+# task2.py
+
+def typeBasedTransformer(**kwargs):
+    """Processes each value based on its type."""
+    transformed = {}
+    for key, value in kwargs.items():
+        if isinstance(value, (int, float)):
+            transformed[key] = value ** 2  # Square numbers
+        elif isinstance(value, str):
+            transformed[key] = value[::-1]  # Reverse string
+        elif isinstance(value, bool):
+            transformed[key] = not value  # Invert boolean
+        elif isinstance(value, (list, tuple)):
+            transformed[key] = value[::-1]  # Reverse list/tuple
+        elif isinstance(value, dict):
+            transformed[key] = {v: k for k, v in value.items()}  # Swap dict keys and values
+        else:
+            transformed[key] = value  # Leave other types unchanged
+    return transformed
+
+# task3.py
+import time
+
+def decorator_1(func):
+    """Decorator that calculates function execution time."""
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"{func.__name__} call executed in {end_time - start_time:.4f} sec")
+        return result
+    return wrapper
+
+# Ensure the decorator module is accessible
+if __name__ == "__main__":
+    print("task3.py module is loaded correctly.")
